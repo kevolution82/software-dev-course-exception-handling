@@ -42,21 +42,30 @@ Your job is to fix it!
 // 🐞 Initial Code with Bugs (to be debugged)
 // ============================================
 
+// ============================================
+// 🐾 Debugging & Exception Handling Activity
+// ============================================
+
+const prompt = require('prompt-sync')();
+
 let animals = [];
 let fees = [];
 
 function addAnimal(name, fee) {
-    if (!name || fee < 0) {
-        throw new Error("Invalid animal name or adoption fee!");
+    if (!name || typeof name !== 'string' || name.trim() === '') {
+        throw new Error("Animal name cannot be blank.");
     }
-    animals.push(name);
+    if (isNaN(fee) || fee < 0) {
+        throw new Error("Adoption fee must be a non-negative number.");
+    }
+    animals.push(name.trim());
     fees.push(fee);
 }
 
 function getAdoptionFee(animalName) {
-    let index = animals.indexOf(animalName);
+    let index = animals.indexOf(animalName.trim());
     if (index === -1) {
-        throw new Error("Animal not found in records!");
+        throw new Error("Animal not found in records.");
     }
     return fees[index];
 }
@@ -78,7 +87,8 @@ while (true) {
 
         if (action === "add") {
             let animal = prompt("Enter the animal's name: ");
-            let fee = Number(prompt("Enter the adoption fee: "));
+            let feeInput = prompt("Enter the adoption fee: ");
+            let fee = Number(feeInput);
 
             try {
                 addAnimal(animal, fee);
@@ -122,4 +132,14 @@ while (true) {
 
 🔹 Structured Exception Handling:
 - Add `try/catch` blocks to catch these errors and allow the app to continue running.
+*/
+
+/*
+🛠️ My Debugging Notes:
+
+- The original code was using prompt() but it broke in Node so I added prompt-sync to fix that.
+- I noticed there was no check for empty names or non-number fees, so I added validation for both.
+- I used try/catch to stop the program from crashing when users enter bad input or ask for animals that don’t exist.
+- I tested it by adding normal animals, using blank names, typing letters instead of numbers, and asking for animals not in the list.
+- Everything worked and the program keeps running even after an error, which is what the instructions asked for.
 */
