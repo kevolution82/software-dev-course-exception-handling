@@ -123,13 +123,17 @@ while (true) {
 /*
 🔹 Invalid Input Errors:
 - What if the user enters a negative fee?
+A: I added checks so it throws an error if someone types in a negative number or something else that isn't a number at all.
 - What if the animal name is blank?
+A: I made sure the animal name can't be blank or just spaces.
 - What if an animal isn't found?
+A: If someone searches for an animal that was never added it shows an error instead of crashing.
 
 🔹 Code Flow Problems:
 - What happens when an exception is thrown?
+A: I wrapped the risky stuff in try and catch so the program keeps going even when something breaks.
 - Does the rest of the program continue?
-
+A: Now when an error happens it tells the user what went wrong and keeps running like it shold.
 🔹 Structured Exception Handling:
 - Add `try/catch` blocks to catch these errors and allow the app to continue running.
 */
